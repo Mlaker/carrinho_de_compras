@@ -1,0 +1,84 @@
+<?php
+     //echo "categoria_manutencao<br>";
+   class categoria_manutencao
+   {
+       var $resultado;
+	   var $registros;
+	   
+	   function categoria_manutencao() //metodo construtor
+	   {
+             $this->con = new conexao();		   
+	   }       
+	   function listar_categoria()
+	   {
+		    //$ordenacao = $_REQUEST['ordem'];
+			//if ($ordenacao == '')
+			 //  $ordenacao = "CAT_DESCRICAO";
+
+		    $filtro = $_REQUEST['pesquisa'];
+			if ($filtro == '')
+			    $filtrar_por == '';
+	 		else
+			   $filtrar_por = $filtro;
+
+			   
+			$sql = "select * from TBL_CATEGORIA where CAT_CODIGO like '".$filtrar_por."%' ";//.$ordenacao;
+            $this->resultado = $this->con->banco->Execute($sql);
+	   }
+	   
+	   function excluir()	   
+	   {
+
+		   	$sql = "delete from TBL_CATEGORIA where CAT_CODIGO = ".$_REQUEST['codigo'];
+        	if($this->resultado = $this->con->banco->Execute($sql))
+			{
+			     alerta("O registro foi excluido com sucesso")	;
+				 return true;
+			}
+			else
+			{
+			     alerta("Nao foi possivel exluir")	;
+				 return false;
+			}	   
+	   }
+	   
+   	   function gravar_incluir()
+	   {
+		   	$sql = "insert into TBL_CATEGORIA (CAT_DESCRICAO) values ('".$_REQUEST['CAT_DESCRICAO']."')";
+        	if($this->resultado = $this->con->banco->Execute($sql))
+			{
+			     alerta("O registro foi incluido com sucesso")	;
+				 return true;
+			}
+			else
+			{
+			     alerta("Nao foi possivel gravar")	;
+				 return false;
+			}
+
+	   }
+       
+  
+   	   function alterar()
+	   {
+		   	$sql = "select * from TBL_CATEGORIA where CAT_CODIGO = ".$_REQUEST['codigo'];
+            $this->resultado = $this->con->banco->Execute($sql); 
+			$this->registros = $this->resultado->FetchNextObject(); //se posiciona no registro
+	   }
+   	   function gravar_alterar()
+	   {
+		   	$sql = "update TBL_CATEGORIA  set CAT_DESCRICAO = '".$_REQUEST['CAT_DESCRICAO']."' where CAT_CODIGO = ".$_REQUEST['codigo'];
+        	$this->resultado = $this->con->banco->Execute($sql); 	   
+	   }
+	   
+	   function total_registros()
+	   {
+		   	$sql = "select count(*) as TOTAL from TBL_CATEGORIA";
+            $this->resultado = $this->con->banco->Execute($sql); 
+			$this->registros = $this->resultado->FetchNextObject(); //se posiciona no registro
+		    return $this->registros->TOTAL;
+	   }
+
+	   
+   }
+?>

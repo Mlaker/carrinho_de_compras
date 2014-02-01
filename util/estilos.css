@@ -1,0 +1,51 @@
+@charsDet "utf-8";
+/*CSS Document*/
+
+
+
+.titulos_listas
+{	
+	font-weight:bold;
+	color:black;
+	background-color:rgba(0,0,255,0.4);
+}
+
+.itens_tabela_banco:nth-child(odd)   {/*onde “even” corresponde às linhas pares e “odd” às linhas impáres.*/
+	
+	background-color:rgba(0,0,255,0.3)
+
+}
+
+
+
+.fundo01{
+
+	background-color:rgba(0,255,120,0.2);
+	/*background-image:url('../img/binary.jpg');
+	background-repeat:repeat;*/
+}
+
+.borda_tabela{
+	
+	border-collapse:collapse;
+	background-color:rgba(0,0,255,0.2);
+	font-weight:bold;
+
+}
+
+
+
+a:visited
+{
+	text-decoration:none;
+	color:#039;
+	font-size:12px;
+}
+
+
+a:link
+{
+	text-decoration:none;
+	color:#039;
+	font-size:16px;
+}

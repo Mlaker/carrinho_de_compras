@@ -1,0 +1,9 @@
+<?php 
+	session_start();
+	unset($_Session['sessao_codigo_usuario']);
+	unset($_Session['sessao_nome_usuario']);
+	unset($_Session['sessao_nivel_usuario']);
+	session_destroy();
+	header("Location:login_form.php");
+	exit;
+?>

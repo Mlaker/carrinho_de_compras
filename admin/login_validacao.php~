@@ -1,0 +1,38 @@
+<?php
+
+	  session_start();
+	if(($_POST['usu_login'] != '') &&($_POST['usu_senha'] != '')){
+
+		require('../util/conecta.php');
+		$sql = "select * from TBL_USUARIO where USU_LOGIN = '" .$_POST['usu_login']."' and USU_SENHA = '".base64_encode($_POST['usu_senha'])."'";
+		$resultado = $con->banco->Execute($sql);
+
+	if($registro = $resultado->FetchNextObject()){
+		
+			//echo "ok, digitou usuario e senha";
+		  session_register('sessao_codigo_usuario');
+		  $_SESSION['sessao_codigo_usuario'] = $registro->USU_CODIGO;
+		  session_register('sessao_nome_usuario');
+		  $_SESSION['sessao_nome_usuario'] = $registro->USU_NOME;
+		  session_register('sessao_nivel_usuario');
+		  $_SESSION['sessao_nivel_usuario'] = $registro->USU_NIVEL;
+			echo "$sessao_codigo_usuario ola" ;
+		  direciona('index.php');
+		 
+	}
+	else
+	{
+	alerta("usuario invalido!");
+	voltar();
+	exit;
+	}
+
+
+	}
+	else	
+		echo "voce precisa digitar usuario e senha";
+	
+
+
+ 
+?>
